@@ -1,0 +1,171 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+  word_document: default
+---
+
+#Assignment 0: Intro to R and Github
+#Yuriy Orobtsev, github - yuriy2110
+
+####The purpose of this assignment is to be able to create codes using RStudio. Accomplish various tasks from calculation to plotting graphs. As  well, knitr packages to format output into pdf.
+
+####Link to the document we used:https://cran.r-project.org/doc/contrib/Torfs+Brauer-Short-R-Intro.pdf
+
+####ToDo 1
+
+```{r}
+(2016 -2014)/(2016 - 1998) * 100
+```
+
+####ToDo 2
+
+```{r}
+a <- (2016 -2014)/(2016 - 1998) * 100
+a
+```
+
+####ToDo 3
+
+```{r}
+vec <- c(4, 5, 8, 11)
+sum(vec)
+```
+
+####ToDo 4
+
+```{r}
+vec <- rnorm(100)
+plot(vec)
+```
+
+####ToDo 5
+
+```{r}
+help(sqrt)
+```
+
+####ToDo 6
+
+```{r}
+source("firstscript.R")
+```
+
+####ToDo 7
+
+```{r}
+p <- 31:60
+q <- matrix(p, 6, 5)
+q
+```
+
+####ToDo 8
+
+```{r}
+x1 <- rnorm(100)
+x2 <- rnorm(100)
+x3 <- rnorm(100)
+
+t <- data.frame(a = c(x1), b = c(x1 + x2), c = c(x1 + x2 + x3))
+#sd(t)
+plot(t)
+```
+
+####sd kept giving an error: (list) object cannot be coerced to type 'double'
+
+####ToDo 9
+
+```{r}
+x1 <- rnorm(100)
+x2 <- rnorm(100)
+x3 <- rnorm(100)
+
+t <- data.frame(a = c(x1), b = c(x1 + x2), c = c(x1 + x2 + x3))
+plot(t)
+plot(t$a, type="l", ylim=range(t),
+     lwd=3, col=rgb(0.9,0,0,0.9))
+lines(t$b, type="s", lwd=2,
+      col=rgb(0,0.9,0,0.9))
+points(t$c, pch=4, cex=1,
+       col=rgb(0,0,1,0.9))
+```
+
+####lwd signifies the line width in comparison the the default, which is 1. pch signifies which symbol is going to be used for the points on the plot. Cex signifies the scaling for the plot text and symbols. rgb signifies the red, green, blue colour of the points with the final value being the opacity of the colour.
+
+####ToDo 10
+
+```{r}
+x <-data.frame(read.table(file="tst1.txt", header = TRUE));
+x$g = x$g*5
+write.table(x, file="tst2.txt", row.names = FALSE)
+```
+
+####This is the result of running the code: tst2.txt
+
+####ToDo 11
+```{r}
+x <- rnorm(100)
+mean(sqrt(x))
+```
+
+####When trying to sqrt the vector imaginary numbers are produced. Output is In sqrt(x) : NaNs produced So it's imposible to find mean of imaginary numbers
+
+####ToDo 12
+
+```{r}
+#Vector for the dates.
+x <- strptime(c("20180211", "20141205", "20181020"), format ="%Y%m%d")
+#Vector for number of presents on each day: 0 today, 5 on Sinterklaas, and 10 on my birthday.
+y <- c(0,5,10)
+plot(x,y, type="p", pch=4, cex=2, xlab="Date", ylab="Number of Presents", col=rgb(0,1,0,1))
+```
+
+####ToDo 13
+
+```{r}
+x <- c(1:100)
+y <- c()
+for(i in 1:100)
+{
+  if (x[i]<5)
+  {
+    y[i]=x[i]*10;
+  }
+  else if (x[i]>90)
+  {
+    y[i]=x[i]*10;
+  }
+  else
+  {
+    y[i]=x[i]*0.1;
+  }
+}
+y
+```
+####ToDo 14
+```{r}
+v=1:100
+func = function(arg1)
+{
+  l = length(arg1)
+  for(i in 1:l)
+  {
+    if (arg1[i] < 5 | arg1[i] > 90)
+    {
+      arg1[i] = arg1[i] * 10
+    } 
+    else
+    {
+      arg1[i] = arg1[i] * 0.1
+    }
+  }
+  return (arg1)
+}
+func(arg1=v)
+```
+
+####ToDo final
+```{r}
+v=1:100
+ifelse(v < 90 | v >90, v * 10, v * 0.1)
+```
